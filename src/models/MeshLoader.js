@@ -16,6 +16,11 @@
   *  @returns loader object
   */
 ROS3D.MeshLoader = {
+
+   onError: function(error) {
+     console.error(error);
+   },
+
    loaders: {
      'dae': function(meshRes, uri, options) {
        const material = options.material;
@@ -43,9 +48,7 @@ ROS3D.MeshLoader = {
            meshRes.add(collada.scene);
          },
          /*onProgress=*/null,
-         function onLoadError(error) {
-           console.error(error);
-         });
+         ROS3D.MeshLoader.onError);
          return loader;
      },
 
@@ -121,12 +124,10 @@ ROS3D.MeshLoader = {
                        meshRes.add(mesh);
                      },
                      /*onProgress=*/null,
-                     function onLoadError(error) {
-                       console.error(error);
-                     });
+                     ROS3D.MeshLoader.onError);
        }
        return loader;
      }
 
    }
- }
+ };
