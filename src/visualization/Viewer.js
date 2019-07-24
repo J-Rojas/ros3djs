@@ -70,7 +70,8 @@ ROS3D.Viewer = function(options) {
     scene : this.scene,
     camera : this.camera,
     displayPanAndZoomFrame : displayPanAndZoomFrame,
-    lineTypePanAndZoomFrame: lineTypePanAndZoomFrame
+    lineTypePanAndZoomFrame: lineTypePanAndZoomFrame,
+    domElement: this.renderer.domElement
   });
   this.cameraControls.userZoomSpeed = cameraZoomSpeed;
 
