@@ -250,7 +250,7 @@ const transpile = {
   ],
   // Track external dependencies for import injection
   externalDependencies: (filepath) => [
-    /(.*)(THREE|EventEmitter2|ROSLIB|ColladaLoader|OBJLoader|MTLLoader|STLLoader).*/g,
+    /(.*)(THREE|EventEmitter2|ROSLIB|ColladaLoader|OBJLoader|MTLLoader|STLLoader|OrbitControls).*/g,
     (match, $preStuffs, $dep) => {
 
       if (/^\s*(?:\*|\/\/)/.test($preStuffs)) {
@@ -489,7 +489,7 @@ const transpile = {
 
       if (externalDeps && externalDeps.length > 0) {
         // Make sure these come after importing THREE
-        const threeExtensions = ['ColladaLoader', 'MTLLoader', 'OBJLoader', 'STLLoader']
+        const threeExtensions = ['ColladaLoader', 'MTLLoader', 'OBJLoader', 'STLLoader', 'OrbitControls']
         const threeExtensionsUsed = []
 
         threeExtensions.forEach(ext => {
@@ -529,6 +529,12 @@ const transpile = {
             }
             case 'EventEmitter2': {
               importString = "import EventEmitter2 from 'eventemitter2';"
+              break;
+            }
+            case 'OrbitControls': {
+              const modulePath = 'shims/three/OrbitControls.js'
+              const resolvedPath = path.relative(path.dirname(filepath), modulePath)
+              importString = `import '${resolvedPath}';`
               break;
             }
             case 'ColladaLoader': {
