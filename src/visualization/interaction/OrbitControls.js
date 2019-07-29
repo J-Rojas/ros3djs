@@ -84,64 +84,69 @@ ROS3D.OrbitControls = function(options) {
     });
   }
 
+  this.initEventMethods(options);
+
+}
+
+ROS3D.OrbitControls.prototype.initEventMethods = function(options) {
   // override event methods
-  var that = this;
+  var self = this; //do not use 'that'; the transpiler will assume these are super calls
   const onContextMenu = this.onContextMenu;
   this.onContextMenu = function(e) {
-    onContextMenu.call(that, e);
-    that.showAxes();
+    onContextMenu.call(self, e);
+    self.showAxes();
   };
 
   const onMouseDown = this.onMouseDown;
   this.onMouseDown = function(e) {
-    onMouseDown.call(that, e);
-    that.showAxes();
+    onMouseDown.call(self, e);
+    self.showAxes();
   };
 
   const onMouseWheel = this.onMouseWheel;
   this.onMouseWheel = function(e) {
-    onMouseWheel.call(that, e);
-    that.showAxes();
+    onMouseWheel.call(self, e);
+    self.showAxes();
   };
 
   const onTouchStart = this.onTouchStart;
   this.onTouchStart = function(e) {
-    onTouchStart.call(that, e);
-    that.showAxes();
+    onTouchStart.call(self, e);
+    self.showAxes();
   };
 
   const onTouchEnd = this.onTouchEnd;
   this.onTouchEnd = function(e) {
-    onTouchEnd.call(that, e);
-    that.showAxes();
+    onTouchEnd.call(self, e);
+    self.showAxes();
   };
 
   const onTouchMove = this.onTouchMove;
   this.onTouchMove = function(e) {
-    onTouchMove.call(that, e);
-    if (that.state !== that.STATE.NONE) {
-      that.showAxes();
+    onTouchMove.call(self, e);
+    if (self.state !== self.STATE.NONE) {
+      self.showAxes();
     }
   };
 
   const onMouseMove = this.onMouseMove;
   this.onMouseMove = function(e) {
-    onMouseMove.call(that, e);
-    if (that.state !== that.STATE.NONE) {
-      that.showAxes();
+    if (self.state !== self.STATE.NONE) {
+      onMouseMove.call(self, e);    
+      self.showAxes();
     }
   };
 
   const onMouseUp = this.onMouseUp;
   this.onMouseUp = function(e) {
-    onMouseUp.call(that, e);
-    that.showAxes();
+    onMouseUp.call(self, e);
+    self.showAxes();
   };
 
   const onKeyDown = this.onKeyDown;
   this.onKeyDown = function(e) {
-    onKeyDown.call(that, e);
-    that.showAxes();
+    onKeyDown.call(self, e);
+    self.showAxes();
   };
 
   //reassign event handlers
