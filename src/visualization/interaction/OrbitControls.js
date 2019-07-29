@@ -86,7 +86,7 @@ ROS3D.OrbitControls = function(options) {
 
   this.initEventMethods(options);
 
-}
+};
 
 ROS3D.OrbitControls.prototype.initEventMethods = function(options) {
   // override event methods
