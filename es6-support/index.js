@@ -44,3 +44,5 @@ export * from './visualization/interaction/MouseHandler'
 export * from './visualization/interaction/OrbitControls'
 export * from './visualization/SceneNode'
 export * from './visualization/Viewer'
+
+export { default as THREE } from  '../shims/three/core'
