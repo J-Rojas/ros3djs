@@ -24,8 +24,8 @@ THREE.OrbitControls = function ( object, domElement, up ) {
 
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
 
-  // Up vector
-  var upVector = up || new THREE.Vector3( 0, 1, 0 )
+  	// Up vector
+	this.upVector = up || new THREE.Vector3( 0, 1, 0 )
 
 	// Set to false to disable this control
 	this.enabled = true;
@@ -134,14 +134,16 @@ THREE.OrbitControls = function ( object, domElement, up ) {
 
 		var offset = new THREE.Vector3();
 
-		// so camera.up is the orbit axis
-		var quat = new THREE.Quaternion().setFromUnitVectors( object.up, upVector );
-		var quatInverse = quat.clone().inverse();
-
+		const cameraOrigUp = object.up;
+		
 		var lastPosition = new THREE.Vector3();
 		var lastQuaternion = new THREE.Quaternion();
 
 		return function update() {
+		
+			// so camera.up is the orbit axis
+			var quat = new THREE.Quaternion().setFromUnitVectors( cameraOrigUp, scope.upVector );
+			var quatInverse = quat.clone().inverse();
 
 			var position = scope.object.position;
 
@@ -269,12 +271,15 @@ THREE.OrbitControls = function ( object, domElement, up ) {
 	var spherical = new THREE.Spherical();
 	var sphericalDelta = new THREE.Spherical();
 
-  //expose as properties
-  this.spherical = spherical;
-  this.sphericalDelta = sphericalDelta;
-
-	var scale = 1;
+	// current position from target
 	var panOffset = new THREE.Vector3();
+	
+	//expose as properties
+	this.spherical = spherical;
+	this.sphericalDelta = sphericalDelta;
+	this.panOffset = panOffset;
+	
+	var scale = 1;
 	var zoomChanged = false;
 
 	var rotateStart = new THREE.Vector2();
