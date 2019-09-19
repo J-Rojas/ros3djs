@@ -5,11 +5,11 @@
   "version": "1.0.1",
   "license": "BSD-3-Clause",
   "main": "./build/ros3d.cjs.js",
-  "module": "./build/ros3d.esm.js",
+  "module": "./src-esm/index.js",
   "dependencies": {
     "eventemitter2": "^4.1.0",
     "roslib": "^1.0.0",
-    "three": "^0.89.0"
+    "three": "^0.106.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -42,8 +42,10 @@
     "build": "grunt build",
     "lint": "grunt lint",
     "lint-fix": "grunt lint-fix",
-    "transpile": "DEBUG=* grunt transpile"
+    "transpile": "DEBUG=* grunt transpile",
+    "prepare": "npm run build"
   },
+  "files": ["build/"], 
   "keywords": [
     "ROS",
     "ros",
