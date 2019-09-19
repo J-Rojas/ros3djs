@@ -24,7 +24,7 @@ const moduleGlobals = {
 
 const outputFiles = {
   commonModule: pkg.main,
-  esModule: pkg.module,
+  esModule: './build/ros3d.esm.js',
   browserGlobal: './build/ros3d.js',
   browserGlobalMinified: './build/ros3d.min.js',
 };
