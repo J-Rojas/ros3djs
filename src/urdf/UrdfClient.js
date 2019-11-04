@@ -50,7 +50,8 @@ ROS3D.UrdfClient = function(options) {
       path : that.path,
       tfClient : that.tfClient,
       tfPrefix : that.tfPrefix,
-      loader : that.loader
+      loader : that.loader,
+      waitForMaterialsToLoad: options.waitForMaterialsToLoad
     });
     that.rootObject.add(that.urdf);
   });

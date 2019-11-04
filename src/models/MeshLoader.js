@@ -46,7 +46,8 @@ ROS3D.MeshLoader = {
            meshRes.add(collada.scene);
          },
          /*onProgress=*/null,
-         ROS3D.MeshLoader.onError);
+         ROS3D.MeshLoader.onError,
+         options);
          return loader;
      },
 

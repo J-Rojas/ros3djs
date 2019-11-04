@@ -55,7 +55,8 @@ ROS3D.Urdf = function(options) {
               path : path,
               resource : uri,
               loader : loader,
-              material : colorMaterial
+              material : colorMaterial,
+              waitForMaterialsToLoad: options.waitForMaterialsToLoad
             });
 
             // check for a scale

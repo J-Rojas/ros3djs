@@ -24,16 +24,29 @@ THREE.ColladaLoader.prototype = {
 
   crossOrigin: 'Anonymous',
 
-  load: function (url, onLoad, onProgress, onError) {
+  load: function (url, onLoad, onProgress, onError, options) {
 
     var scope = this;
+    options = options || {};
 
     var path = THREE.Loader.prototype.extractUrlBase(url);
 
     var loader = new THREE.FileLoader(scope.manager);
     loader.load(url, function (text) {
 
-      onLoad(scope.parse(text, path));
+      var promise = null;
+      if (options.waitForMaterialsToLoad) {
+        promise = Promise.resolve();
+      }
+      const model = scope.parse(text, path, promise); 
+      
+      if (promise) {
+        model.promise.finally(() => {
+          onLoad(model);
+        });
+      } else {
+        onLoad(model);
+      }
 
     }, onProgress, onError);
 
@@ -55,7 +68,7 @@ THREE.ColladaLoader.prototype = {
 
   },
 
-  parse: function (text, path) {
+  parse: function (text, path, promise) {
 
     function getElementsByTagName(xml, name) {
 
@@ -1401,8 +1414,16 @@ THREE.ColladaLoader.prototype = {
 
           var surface = effect.profile.surfaces[sampler.source];
 
-          var texture = textureLoader.load(getImage(surface.init_from));
+          var textureLoadResolve = undefined, textureLoadReject = undefined;
+          if (promise) {
+            var textureLoadPromise = new Promise((resolve, reject) => {
+              textureLoadResolve = resolve;
+              textureLoadReject = reject;
+            });
+            promise = promise.then(() => textureLoadPromise);
+          }
 
+          var texture = textureLoader.load(getImage(surface.init_from), textureLoadResolve, undefined, textureLoadReject);        
           var extra = textureObject.extra;
 
           if (extra !== undefined && extra.technique !== undefined && isEmpty(extra.technique) === false) {
@@ -3469,7 +3490,8 @@ THREE.ColladaLoader.prototype = {
       animations: animations,
       kinematics: kinematics,
       library: library,
-      scene: scene
+      scene: scene,
+      promise: promise
     };
 
   }
