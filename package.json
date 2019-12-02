@@ -45,7 +45,7 @@
     "transpile": "DEBUG=* grunt transpile",
     "prepare": "npm run build"
   },
-  "files": ["build/"], 
+  "files": ["build/", "src-esm/"], 
   "keywords": [
     "ROS",
     "ros",
