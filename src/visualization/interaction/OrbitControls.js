@@ -168,14 +168,14 @@ ROS3D.OrbitControls.prototype.initEventMethods = function(options) {
   options.domElement.removeEventListener('touchmove', onTouchMove);
   options.domElement.addEventListener('touchmove', this.onTouchMove);
 
-  options.domElement.removeEventListener('mousemove', onMouseMove);
-  options.domElement.addEventListener('mousemove', this.onMouseMove);
+  document.removeEventListener('mousemove', onMouseMove);
+  document.addEventListener('mousemove', this.onMouseMove);
 
-  options.domElement.removeEventListener('mouseup', onMouseUp);
-  options.domElement.addEventListener('mouseup', this.onMouseUp);
+  document.removeEventListener('mouseup', onMouseUp);
+  document.addEventListener('mouseup', this.onMouseUp);
 
-  options.domElement.removeEventListener('keydown', onKeyDown);
-  options.domElement.addEventListener('keydown', this.onKeyDown);
+  window.removeEventListener('keydown', onKeyDown);
+  window.addEventListener('keydown', this.onKeyDown);
 
   // override superclass methods
   this.rotateLeft = ROS3D.OrbitControls.prototype.rotateLeft;

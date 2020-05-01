@@ -36,6 +36,15 @@ ROS3D.MouseHandler = function(options) {
 };
 
 /**
+ * Dispose of event handlers
+ */
+ROS3D.MouseHandler.prototype.dispose = function() {
+  Object.entries(this.listeners).forEach(function(entry) {
+    this.renderer.domElement.removeEventListener(entry[0], entry[1]);    
+  }, this);
+};
+
+/**
  * Process the particular DOM even that has occurred based on the mouse's position in the scene.
  *
  * @param domEvent - the DOM event to process

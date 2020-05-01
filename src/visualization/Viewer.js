@@ -187,3 +187,20 @@ ROS3D.Viewer.prototype.resize = function(width, height) {
   this.camera.updateProjectionMatrix();
   this.renderer.setSize(width, height);
 };
+
+/**
+ * 
+ * Dispose - clean up any system resources/event handlers
+ * 
+ */
+ROS3D.Viewer.prototype.dispose = function() {
+  this.scene.dispose();  
+  this.cameraControls.dispose();
+  this.highlighter.dispose();
+  this.highlighter.mouseHandler.dispose();
+  this.renderer.dispose();
+  this.highlighter.renderer = null;
+  this.renderer = null;
+  this.highlighter = null;
+  this.cameraControls = null;
+}
