@@ -9,7 +9,7 @@
   "dependencies": {
     "eventemitter2": "^6.4.0",
     "roslib": "github:J-Rojas/roslibjs#local-develop",
-    "three": "0.95.0 - 0.108.0"
+    "three": "^0.118.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
