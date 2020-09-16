@@ -45,7 +45,11 @@
     "transpile": "DEBUG=* grunt transpile",
     "prepare": "npm run build"
   },
-  "files": ["build/", "src-esm/", "shims/"], 
+  "files": [
+    "build/",
+    "src-esm/",
+    "shims/"
+  ],
   "keywords": [
     "ROS",
     "ros",
