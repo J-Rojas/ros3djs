@@ -277,6 +277,7 @@ THREE.OrbitControls = function ( object, domElement, up ) {
   this.STATE = STATE;
 
 	this.state = STATE.NONE;
+	this.document = document;
 
 	var EPS = 0.000001;
 
@@ -773,8 +774,8 @@ THREE.OrbitControls = function ( object, domElement, up ) {
 
 		if ( scope.state !== STATE.NONE ) {
 
-			document.addEventListener( 'mousemove', scope.onMouseMove, false );
-			document.addEventListener( 'mouseup', scope.onMouseUp, false );
+			scope.document.addEventListener( 'mousemove', scope.onMouseMove, false );
+			scope.document.addEventListener( 'mouseup', scope.onMouseUp, false );
 
 			scope.dispatchEvent( startEvent );
 

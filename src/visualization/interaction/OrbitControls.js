@@ -93,37 +93,37 @@ ROS3D.OrbitControls.prototype.initEventMethods = function(options) {
   var self = this; //do not use 'that'; the transpiler will assume these are super calls
   const onContextMenu = this.onContextMenu;
   this.onContextMenu = function(e) {
-    onContextMenu.call(self, e);
+    onContextMenu.call(self, e.domEvent);
     self.showAxes();
   };
 
   const onMouseDown = this.onMouseDown;
   this.onMouseDown = function(e) {
-    onMouseDown.call(self, e);
+    onMouseDown.call(self, e.domEvent);
     self.showAxes();
   };
 
   const onMouseWheel = this.onMouseWheel;
   this.onMouseWheel = function(e) {
-    onMouseWheel.call(self, e);
+    onMouseWheel.call(self, e.domEvent);
     self.showAxes();
   };
 
   const onTouchStart = this.onTouchStart;
   this.onTouchStart = function(e) {
-    onTouchStart.call(self, e);
+    onTouchStart.call(self, e.domEvent);
     self.showAxes();
   };
 
   const onTouchEnd = this.onTouchEnd;
   this.onTouchEnd = function(e) {
-    onTouchEnd.call(self, e);
+    onTouchEnd.call(self, e.domEvent);
     self.showAxes();
   };
 
   const onTouchMove = this.onTouchMove;
   this.onTouchMove = function(e) {
-    onTouchMove.call(self, e);
+    onTouchMove.call(self, e.domEvent);
     if (self.state !== self.STATE.NONE) {
       self.showAxes();
     }
@@ -132,14 +132,14 @@ ROS3D.OrbitControls.prototype.initEventMethods = function(options) {
   const onMouseMove = this.onMouseMove;
   this.onMouseMove = function(e) {
     if (self.state !== self.STATE.NONE) {
-      onMouseMove.call(self, e);    
+      onMouseMove.call(self, e.domEvent);    
       self.showAxes();
     }
   };
 
   const onMouseUp = this.onMouseUp;
   this.onMouseUp = function(e) {
-    onMouseUp.call(self, e);
+    onMouseUp.call(self, e.domEvent);
     self.showAxes();
   };
 
@@ -151,31 +151,33 @@ ROS3D.OrbitControls.prototype.initEventMethods = function(options) {
 
   //reassign event handlers
   options.domElement.removeEventListener('contextmenu', onContextMenu);
-  options.domElement.addEventListener('contextmenu', this.onContextMenu);
+  this.addEventListener('contextmenu', this.onContextMenu);
 
   options.domElement.removeEventListener('mousedown', onMouseDown);
-  options.domElement.addEventListener('mousedown', this.onMouseDown);
+  this.addEventListener('mousedown', this.onMouseDown);
 
   options.domElement.removeEventListener('wheel', onMouseWheel);
-  options.domElement.addEventListener('wheel', this.onMouseWheel);
+  this.addEventListener('wheel', this.onMouseWheel);
 
   options.domElement.removeEventListener('touchstart', onTouchStart);
-  options.domElement.addEventListener('touchstart', this.onTouchStart);
+  this.addEventListener('touchstart', this.onTouchStart);
 
   options.domElement.removeEventListener('touchend', onTouchEnd);
-  options.domElement.addEventListener('touchend', this.onTouchEnd);
+  this.addEventListener('touchend', this.onTouchEnd);
 
   options.domElement.removeEventListener('touchmove', onTouchMove);
-  options.domElement.addEventListener('touchmove', this.onTouchMove);
+  this.addEventListener('touchmove', this.onTouchMove);
 
   document.removeEventListener('mousemove', onMouseMove);
-  document.addEventListener('mousemove', this.onMouseMove);
+  this.addEventListener('mousemove', this.onMouseMove);
 
   document.removeEventListener('mouseup', onMouseUp);
-  document.addEventListener('mouseup', this.onMouseUp);
+  this.addEventListener('mouseup', this.onMouseUp);
 
   window.removeEventListener('keydown', onKeyDown);
   window.addEventListener('keydown', this.onKeyDown);
+
+  this.document = this;
 
   // override superclass methods
   this.rotateLeft = ROS3D.OrbitControls.prototype.rotateLeft;
@@ -280,3 +282,4 @@ ROS3D.OrbitControls.prototype.zoomOut = function(zoomScale) {
 };
 
 Object.assign(ROS3D.OrbitControls.prototype, THREE.OrbitControls.prototype);
+Object.assign(ROS3D.OrbitControls.prototype, THREE.EventDispatcher.prototype);

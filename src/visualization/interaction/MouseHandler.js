@@ -25,7 +25,7 @@ ROS3D.MouseHandler = function(options) {
   // listen to DOM events
   var eventNames = [ 'contextmenu', 'click', 'dblclick', 'mouseout', 'mousedown', 'mouseup',
       'mousemove', 'mousewheel', 'DOMMouseScroll', 'touchstart', 'touchend', 'touchcancel',
-      'touchleave', 'touchmove' ];
+      'touchleave', 'touchmove', 'wheel' ];
   this.listeners = {};
 
   // add event listeners for the associated mouse events
