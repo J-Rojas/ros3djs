@@ -174,9 +174,13 @@ ROS3D.MouseHandler.prototype.processDomEvent = function(domEvent) {
   }
 
   // pass through event
-  this.notify(target, domEvent.type, event3D);
+  var eventStatus = this.notify(target, domEvent.type, event3D);
   if (domEvent.type === 'mousedown' || domEvent.type === 'touchstart' || domEvent.type === 'touchmove') {
     this.dragging = true;
+  }
+  if (domEvent.type === 'wheel' && eventStatus === 1 && target !== this.fallbackTarget && this.fallbackTarget !== void(0)) {
+    target = this.fallbackTarget
+    this.notify(target, domEvent.type, event3D);
   }
   this.lastTarget = target;
 };
