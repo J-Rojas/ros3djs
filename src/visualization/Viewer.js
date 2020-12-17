@@ -54,8 +54,8 @@ ROS3D.Viewer = function(options) {
   };
 
   if (elem && elem.nodeName.toLowerCase() === 'canvas') {
-    renderOptions.canvas = elem
-    renderOptions.context = context || elem.getContext('webgl', { alpha: true })
+    renderOptions.canvas = elem;
+    renderOptions.context = context || elem.getContext('webgl', { alpha: true });
   }
 
   this.renderer = new THREE.WebGLRenderer(renderOptions);
@@ -203,4 +203,4 @@ ROS3D.Viewer.prototype.dispose = function() {
   this.renderer = null;
   this.highlighter = null;
   this.cameraControls = null;
-}
+};

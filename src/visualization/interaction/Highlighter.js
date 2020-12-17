@@ -15,9 +15,9 @@ ROS3D.Highlighter = function(options) {
   this.mouseHandler = options.mouseHandler;
   this.hoverObjs = {};
 
-  this._listeners = {}
-  this._listeners['mouseover'] = this.onMouseOver.bind(this)
-  this._listeners['mouseout'] = this.onMouseOut.bind(this)
+  this._listeners = {};
+  this._listeners['mouseover'] = this.onMouseOver.bind(this);
+  this._listeners['mouseout'] = this.onMouseOut.bind(this);
 
   // bind the mouse events
   this.mouseHandler.addEventListener('mouseover', this._listeners['mouseover']);

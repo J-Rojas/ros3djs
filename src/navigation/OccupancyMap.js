@@ -41,7 +41,7 @@ function InStream(data, isLittleEndian) {
 
   Object.defineProperty(this, 'isEnd', { get: () => this.cursor >= this.data.length });
   return this;
-};
+}
 
 // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
@@ -413,7 +413,7 @@ ROS3D.OcTreeBase.prototype._buildFaces = function () {
           pos[1] + vertex[1] * size,
           pos[2] + vertex[2] * size
         );
-      };
+      }
 
       const colorArr = [color.r, color.g, color.b];
 

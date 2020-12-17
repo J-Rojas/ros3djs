@@ -127,6 +127,7 @@ ROS3D.MouseHandler.prototype.processDomEvent = function(domEvent) {
   // in the normal case, we need to check what is under the mouse
   target = this.lastTarget;
   var intersections = [];
+  var eventStatus;
   intersections = mouseRaycaster.intersectObject(this.rootObject, true);
 
   if (intersections.length > 0) {
@@ -143,7 +144,7 @@ ROS3D.MouseHandler.prototype.processDomEvent = function(domEvent) {
     // 0: Accepted
     // 1: Failed
     // 2: Continued
-    var eventStatus = this.notify(target, 'mouseover', event3D);
+    eventStatus = this.notify(target, 'mouseover', event3D);
     if (eventStatus === 0) {
       this.notify(this.lastTarget, 'mouseout', event3D);
     } else if(eventStatus === 1) {
@@ -173,12 +174,12 @@ ROS3D.MouseHandler.prototype.processDomEvent = function(domEvent) {
   }
 
   // pass through event
-  var eventStatus = this.notify(target, domEvent.type, event3D);
+  eventStatus = this.notify(target, domEvent.type, event3D);
   if (domEvent.type === 'mousedown' || domEvent.type === 'touchstart' || domEvent.type === 'touchmove') {
     this.dragging = true;
   }
   if (domEvent.type === 'wheel' && eventStatus === 1 && target !== this.fallbackTarget && this.fallbackTarget !== void(0)) {
-    target = this.fallbackTarget
+    target = this.fallbackTarget;
     this.notify(target, domEvent.type, event3D);
   }
   this.lastTarget = target;
