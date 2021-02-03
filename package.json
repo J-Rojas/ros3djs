@@ -6,10 +6,10 @@
   "license": "BSD-3-Clause",
   "main": "./build/ros3d.cjs.js",
   "module": "./src-esm/index.js",
-  "dependencies": {
-    "eventemitter2": "^6.4.0",
+  "peerDependencies": {
     "roslib": "github:J-Rojas/roslibjs#local-develop",
-    "three": "^0.118.0"
+    "three": "^0.118.0",
+    "eventemitter2": "^6.4.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
